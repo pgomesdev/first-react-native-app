@@ -114,7 +114,7 @@ class AddEntry extends Component {
     if (this.props.alreadyLogged) {
       return (
         <View style={styles.center}>
-          <Ionicons name={Platform.OS = 'ios' ? 'ios-happy' : 'md-happy'} size={100} />
+          <Ionicons name={Platform.OS === 'ios' ? 'ios-happy' : 'md-happy'} size={100} />
           <Text>You already logged your information for today.</Text>
           <TextButton style={{padding: 10}} onPress={this.reset}>
             Reset
@@ -122,36 +122,6 @@ class AddEntry extends Component {
         </View>
       )
     }
-
-    // return (
-    //   <View style={styles.container}>
-    //     <DateHeader date={new Date().toLocaleDateString()} />
-    //     {Object.keys(metaInfo).map(key => {
-    //       const { getIcon, type, ...rest } = metaInfo[key]
-    //       const value = this.state[key]
-
-    //       return (
-    //         <View key={key} style={styles.row}>
-    //           {getIcon()}
-    //           {type === 'slider'
-    //             ? <UdaciSlider
-    //                 value={value}
-    //                 onChange={(value) => this.slide(key, value)}
-    //                 {...rest}
-    //               />
-    //             : <UdaciSteppers
-    //                 value={value}
-    //                 onIncrement={() => this.increment(key)}
-    //                 onDecrement={() => this.decrement(key)}
-    //                 {...rest}
-    //               />
-    //           }
-    //         </View>
-    //       )
-    //     })}
-    //     <SubmitBtn onPress={this.submit} />
-    //   </View>
-    // )
 
     return (
       <View style={styles.container}>
