@@ -5,7 +5,7 @@ import { white, gray, purple } from '../utils/colors'
 
 const UdaciSteppers = ({ max, unit, step, value, onIncrement, onDecrement }) => (
   <View style={[styles.row, {justifyContent: 'space-between'}]}>
-    {Platform.OS = 'ios'
+    {Platform.OS === 'ios'
       ? <View style={{flexDirection: 'row'}}>
           <TouchableOpacity
             style={[styles.iosBtn, {borderTopRightRadius: 0, borderBottomRightRadius: 0}]}

@@ -11,10 +11,10 @@ import { submitEntry, removeEntry } from '../utils/api'
 import { addEntry } from '../actions'
 import { white, purple } from '../utils/colors'
 
-function SubmitBtn({ onPress }) {
+const SubmitBtn = ({ onPress }) => {
   return (
     <TouchableOpacity
-      style={Platform.OS = 'ios' ? styles.iosSubmitBtn : styles.androidSubmitBtn}
+      style={Platform.OS === 'ios' ? styles.iosSubmitBtn : styles.androidSubmitBtn}
       onPress={onPress}
     >
       <Text style={styles.submitBtnText}>SUBMIT</Text>
@@ -122,6 +122,36 @@ class AddEntry extends Component {
         </View>
       )
     }
+
+    // return (
+    //   <View style={styles.container}>
+    //     <DateHeader date={new Date().toLocaleDateString()} />
+    //     {Object.keys(metaInfo).map(key => {
+    //       const { getIcon, type, ...rest } = metaInfo[key]
+    //       const value = this.state[key]
+
+    //       return (
+    //         <View key={key} style={styles.row}>
+    //           {getIcon()}
+    //           {type === 'slider'
+    //             ? <UdaciSlider
+    //                 value={value}
+    //                 onChange={(value) => this.slide(key, value)}
+    //                 {...rest}
+    //               />
+    //             : <UdaciSteppers
+    //                 value={value}
+    //                 onIncrement={() => this.increment(key)}
+    //                 onDecrement={() => this.decrement(key)}
+    //                 {...rest}
+    //               />
+    //           }
+    //         </View>
+    //       )
+    //     })}
+    //     <SubmitBtn onPress={this.submit} />
+    //   </View>
+    // )
 
     return (
       <View style={styles.container}>
