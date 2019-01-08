@@ -1,14 +1,23 @@
 import React from 'react'
-import { View, Platform } from 'react-native'
+import { View, Platform, StatusBar } from 'react-native'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
-import { createBottomTabNavigator, createMaterialTopTabNavigator, createAppContainer } from 'react-navigation'
+import { createMaterialTopTabNavigator, createBottomTabNavigator, createAppContainer } from 'react-navigation'
 import { FontAwesome, Ionicons } from '@expo/vector-icons'
 import AddEntry from './components/AddEntry'
 import History from './components/History'
 import reducer from './reducers'
 import middleware from './middleware'
 import { purple, white } from './utils/colors'
+import { Constants } from 'expo'
+
+const UdaciStatusBar = ({ backgroundColor, ...props }) => {
+  return (
+    <View style={{backgroundColor, height: Constants.statusBarHeight}}>
+      <StatusBar translucent backgroundColor={backgroundColor} {...props} />
+    </View>
+  )
+}
 
 const store = createStore(reducer, middleware)
 
@@ -17,18 +26,22 @@ const TabsConfig = {
     screen: History,
     navigationOptions: {
       tabBarLabel: 'History',
-      //tabBarIcon: ({ tintColor }) => <Ionicons name='plus-square' size={30} color={tintColor} />,
+      tabBarIcon: ({ tintColor }) => <FontAwesome name='bookmark' size={30} color={tintColor} />,
     },
   },
   AddEntry: {
     screen: AddEntry,
     navigationOptions: {
       tabBarLabel: 'Add Entry',
-      //tabBarIcon: ({ tintColor }) => <FontAwesome name='plus-square' size={30} color={tintColor} />,
+      tabBarIcon: ({ tintColor }) => <FontAwesome name='plus-square' size={30} color={tintColor} />,
     },
   },
 }
+
 const TabsOptions = {
+  navigationOptions: {
+    header: null,
+  },
   tabBarOptions: {
     activeTintColor: Platform.OS === 'ios' ? purple : white,
   },
@@ -45,20 +58,19 @@ const TabsOptions = {
   },
 }
 
-// const Tabs = Platform.OS === 'ios'
-//   ? createBottomTabNavigator(TabsConfig, TabsOptions)
-//   : createMaterialTopTabNavigator(TabsConfig, TabsOptions)
-const Tabs = createMaterialTopTabNavigator(TabsConfig, TabsOptions)
+const Tabs = Platform.OS === 'ios'
+  ? createBottomTabNavigator(TabsConfig)
+  : createMaterialTopTabNavigator(TabsConfig)
 
-const TabsContainer = createAppContainer(Tabs)
+const AppContainer = createAppContainer(Tabs)
 
 class App extends React.Component {
   render() {
     return (
       <Provider store={store}>
         <View style={{flex: 1}}>
-          <View style={{height: 20}} />
-          <TabsContainer />
+          <UdaciStatusBar backgroundColor={purple} barStyle={'light-content'} />
+          <AppContainer />
         </View>
       </Provider>
     )
