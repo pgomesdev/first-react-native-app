@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, Platform, StatusBar } from 'react-native'
+import { View, Platform, StatusBar } from 'react-native'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import { createMaterialTopTabNavigator, createBottomTabNavigator, createStackNavigator, createAppContainer } from 'react-navigation'
@@ -11,6 +11,7 @@ import EntryDetail from './components/EntryDetail'
 import reducer from './reducers'
 import middleware from './middleware'
 import { purple, white } from './utils/colors'
+import Live from './components/Live'
 
 const UdaciStatusBar = ({ backgroundColor, ...props }) => {
   return (
@@ -35,6 +36,13 @@ const TabsConfig = {
     navigationOptions: {
       tabBarLabel: 'Add Entry',
       tabBarIcon: ({ tintColor }) => <FontAwesome name='plus-square' size={30} color={tintColor} />,
+    },
+  },
+  Live: {
+    screen: Live,
+    navigationOptions: {
+      tabBarLabel: 'Live',
+      tabBarIcon: ({ tintColor }) => <Ionicons name='md-speedometer' size={30} color={tintColor} />,
     },
   },
 }
