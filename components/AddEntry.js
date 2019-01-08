@@ -6,7 +6,13 @@ import DateHeader from './DateHeader'
 import TextButton from './TextButton'
 import UdaciSlider from './UdaciSlider'
 import UdaciSteppers from './UdaciSteppers'
-import { getMetricMetaInfo, timeToString, getDailyReminderValue } from '../utils/helpers'
+import {
+  getMetricMetaInfo,
+  timeToString,
+  getDailyReminderValue,
+  clearLocalNotifications,
+  setLocalNotification
+} from '../utils/helpers'
 import { submitEntry, removeEntry } from '../utils/api'
 import { addEntry } from '../actions'
 import { white, purple } from '../utils/colors'
@@ -83,7 +89,8 @@ class AddEntry extends Component {
 
     submitEntry({ entry, key })
 
-    // Clear local notification
+    clearLocalNotifications()
+      .then(setLocalNotification)
   }
 
   reset = () => {
@@ -105,8 +112,6 @@ class AddEntry extends Component {
     this.toHome()
 
     removeEntry(key)
-
-    // Clear local notification 
   }
 
   toHome = () => {

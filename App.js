@@ -12,6 +12,7 @@ import reducer from './reducers'
 import middleware from './middleware'
 import { purple, white } from './utils/colors'
 import Live from './components/Live'
+import { setLocalNotification } from './utils/helpers'
 
 const UdaciStatusBar = ({ backgroundColor, ...props }) => {
   return (
@@ -21,7 +22,7 @@ const UdaciStatusBar = ({ backgroundColor, ...props }) => {
   )
 }
 
-const store = createStore(reducer, middleware)
+const store = createStore(reducer)
 
 const TabsConfig = {
   History: {
@@ -91,6 +92,10 @@ const Stack = createStackNavigator(StackConfig)
 const AppContainer = createAppContainer(Stack)
 
 class App extends React.Component {
+  componentDidMount() {
+    return setLocalNotification()
+  }
+
   render() {
     return (
       <Provider store={store}>
