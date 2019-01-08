@@ -1,6 +1,7 @@
 {
   "expo": {
-    "name": "udacifitness",
+    "name": "UdaciFitness",
+    "description": "Control your daily activities with this app!",
     "slug": "udacifitness",
     "privacy": "public",
     "sdkVersion": "31.0.0",
@@ -10,7 +11,7 @@
     ],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "https://tylermcginnis.com/udacifitness-512.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -23,7 +24,14 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "org.udacifitness.exp"
+    },
+    "android": {
+      "package": "org.udacifitness.exp"
+    },
+    "notification": {
+      "icon": "https://tylermcginnis.com/udacifitness-45.png"
     }
   }
 }
