@@ -10,6 +10,7 @@ import { getMetricMetaInfo, timeToString, getDailyReminderValue } from '../utils
 import { submitEntry, removeEntry } from '../utils/api'
 import { addEntry } from '../actions'
 import { white, purple } from '../utils/colors'
+import { NavigationActions } from 'react-navigation'
 
 const SubmitBtn = ({ onPress }) => {
   return (
@@ -78,7 +79,7 @@ class AddEntry extends Component {
       eat: 0,
     }))
 
-    // Navigate to Home
+    this.toHome()
 
     submitEntry({ entry, key })
 
@@ -101,11 +102,17 @@ class AddEntry extends Component {
       eat: 0,
     }))
 
-    // Navigate to Home
+    this.toHome()
 
     removeEntry(key)
 
     // Clear local notification 
+  }
+
+  toHome = () => {
+    this.props.navigation.dispatch(NavigationActions.back({
+      key: 'AddEntry'
+    }))
   }
 
   render() {

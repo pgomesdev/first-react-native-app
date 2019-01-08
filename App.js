@@ -2,14 +2,15 @@ import React from 'react'
 import { View, Text, Platform, StatusBar } from 'react-native'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
-import { createMaterialTopTabNavigator, createBottomTabNavigator, createAppContainer } from 'react-navigation'
+import { createMaterialTopTabNavigator, createBottomTabNavigator, createStackNavigator, createAppContainer } from 'react-navigation'
 import { FontAwesome, Ionicons } from '@expo/vector-icons'
+import { Constants } from 'expo'
 import AddEntry from './components/AddEntry'
 import History from './components/History'
+import EntryDetail from './components/EntryDetail'
 import reducer from './reducers'
 import middleware from './middleware'
 import { purple, white } from './utils/colors'
-import { Constants } from 'expo'
 
 const UdaciStatusBar = ({ backgroundColor, ...props }) => {
   return (
@@ -59,10 +60,27 @@ const TabsOptions = {
 }
 
 const Tabs = Platform.OS === 'ios'
-  ? createBottomTabNavigator(TabsConfig)
-  : createMaterialTopTabNavigator(TabsConfig)
+  ? createBottomTabNavigator(TabsConfig, TabsOptions)
+  : createMaterialTopTabNavigator(TabsConfig, TabsOptions)
 
-const AppContainer = createAppContainer(Tabs)
+const StackConfig = {
+  Home: {
+    screen: Tabs,
+  },
+  EntryDetail: {
+    screen: EntryDetail,
+    navigationOptions: {
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: purple,
+      },
+    },
+  },
+}
+
+const Stack = createStackNavigator(StackConfig)
+
+const AppContainer = createAppContainer(Stack)
 
 class App extends React.Component {
   render() {
